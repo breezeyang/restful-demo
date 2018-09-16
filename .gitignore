@@ -3,3 +3,12 @@
 */.settings
 *\.class
 \target
+jersey-grizzly-demo/.DS_Store
+resteasy-demo/.DS_Store
+resteasy-demo/src/.DS_Store
+*.log
+*.jar
+*.jar
+springboot-demo/.mvn/wrapper/maven-wrapper.jar
+springboot-demo/.mvn/wrapper/maven-wrapper.properties
+springboot-demo/.mvn/wrapper/maven-wrapper.jar

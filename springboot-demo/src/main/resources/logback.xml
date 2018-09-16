@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="file.name" value="springboot-demo" />
+
+	<property name="max.history" value="90" />
+
+	<!-- stdout appender定义 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d [%thread] %-5level %logger{68} %line - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="DEBUGOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d [%thread] %-5level %logger{68} %line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 日志文件 appender定义 -->
+	<appender name="lbcAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>logs/${file.name}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>logs/history/%d{yyyy-MM,aux}/%d.${file.name}.log
+			</fileNamePattern>
+			<maxHistory>${max.history}</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d [%thread] %-5level %logger{68} %line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="lbcErrorAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+
+		<File>logs/${file.name}.error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logs/history/%d{yyyy-MM,aux}/%d.${file.name}.error.log
+			</FileNamePattern>
+			<maxHistory>${max.history}</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+			<Pattern>%d [%thread] %-5level %logger{68} %line - %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+
+	<appender name="lbcAccessAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>logs/${file.name}.access.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>logs/history/%d{yyyy-MM,aux}/%d.${file.name}.access.log
+			</fileNamePattern>
+			<maxHistory>${max.history}</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d [%thread] %-5level %logger{68} %line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<appender name="PoiSQLAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>logs/${file.name}.sql.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>logs/history/%d{yyyy-MM,aux}/%d.${file.name}.sql.log
+			</fileNamePattern>
+			<maxHistory>90</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="lbcAppender" />
+		<appender-ref ref="lbcErrorAppender" />
+	</root>
+</configuration>
+
